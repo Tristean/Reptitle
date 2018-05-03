@@ -28,6 +28,8 @@ public class ReptitleClientImp implements ReptitleService {
     }
 
     public String httpGet(String url) {
+        if (url == null)
+            return "kong";
         HttpClient client = getClient();
         HttpGet httpGet = new HttpGet(url);
         try {

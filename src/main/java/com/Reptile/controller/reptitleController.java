@@ -15,6 +15,7 @@ public class reptitleController {
     private static ResovleService  resovleService = new JsoupServicesImp();
     private static boolean isContinue = true;
     static List<List<String>> listOfImg = new ArrayList<List<String>>();
+    private static  int count = 0;
 
     public static boolean isContinue() {
         return isContinue;
@@ -24,19 +25,39 @@ public class reptitleController {
     }
 
     public static void getText(String url) {
-
-        for (int i = 0; i < 10; i++) {
-            int id = 0;
+        /*
+        while(isContinue) {
+            if (count == 10) {
+                isContinue = false;
+                System.out.println("结束");
+            }
+            System.out.println("url = " + url);
             String html = reptitleService.httpGet(url);
             List<String> imgs = resovleService.getImg(html);
-            resovleService.saveUrl(html);
+            listOfImg.add(imgs);
             List<String> urls = resovleService.getFromRedis();
-            getText(urls.get(id));
-            urls.remove(id++);
+            resovleService.saveUrl(html);
+            count ++;
+            System.out.println("count = "+ count);
+            getText(urls.get(count));
+        }
+        */
+        if (count == 10)
+            return;
+        System.out.println("url = " + url );
+        String html = reptitleService.httpGet(url);
+        List<String> imgs = resovleService.getImg(html);
+        listOfImg.add(imgs);
+        resovleService.saveUrl(html);
+        List<String> urls = resovleService.getFromRedis();
+        count ++;
+        for (int i = 0; i < urls.size(); i++) {
+            getText(urls.get(i));
         }
     }
 
     public static void main(String [] args) {
-
+        getText("https://www.zhihu.com/signup?next=%2F");
+        System.out.println(listOfImg.size());
     }
 }

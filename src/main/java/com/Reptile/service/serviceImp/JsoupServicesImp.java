@@ -40,6 +40,7 @@ public class JsoupServicesImp implements ResovleService {
         for (Element element : elements) {
             String img = element.attr("src");
             img = urlService.ChangeUrl(img);
+            System.out.println("图片地址为" + img);
             imgs.add(img);
         }
         return imgs;
