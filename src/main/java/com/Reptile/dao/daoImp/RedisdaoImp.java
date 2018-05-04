@@ -72,4 +72,13 @@ public class RedisdaoImp implements Redisdao {
         }
         return false;
     }
+
+    @Override
+    public boolean deleteUrl(List<String> urls) {
+        for (int i = 0; i < urls.size(); i++) {
+            jedis.del(i+"");
+        }
+        System.out.println("url已经删除");
+        return true;
+    }
 }

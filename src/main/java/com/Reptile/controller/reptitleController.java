@@ -42,22 +42,28 @@ public class reptitleController {
             getText(urls.get(count));
         }
         */
-        if (count == 10)
-            return;
-        System.out.println("url = " + url );
+        System.out.println(" url = " + url );
         String html = reptitleService.httpGet(url);
         List<String> imgs = resovleService.getImg(html);
         listOfImg.add(imgs);
         resovleService.saveUrl(html);
         List<String> urls = resovleService.getFromRedis();
-        count ++;
         for (int i = 0; i < urls.size(); i++) {
-            getText(urls.get(i));
+            String tempUrl = urls.get(i);
+            if (tempUrl == null || tempUrl.equals("")) {
+                continue;
+            }
+            html = reptitleService.httpGet(urls.get(i));
+            imgs = resovleService.getImg(html);
+            listOfImg.add(imgs);
+            resovleService.saveUrl(html);
         }
+        resovleService.deleteUrl(urls);
     }
 
     public static void main(String [] args) {
         getText("https://www.zhihu.com/signup?next=%2F");
+        System.out.println("https://www.zhihu.com/signup?next=%2F".contains("http"));
         System.out.println(listOfImg.size());
     }
 }

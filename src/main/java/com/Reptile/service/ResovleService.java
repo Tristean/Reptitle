@@ -11,4 +11,6 @@ public interface ResovleService {
     List<String> getImg(String html);
 
     boolean saveUrl(String html);
+
+    boolean deleteUrl(List<String> urls);
 }

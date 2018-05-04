@@ -33,6 +33,8 @@ public class JsoupServicesImp implements ResovleService {
     }
 
     public List<String> getImg(String html) {
+        if (html == "kong")
+            return null;
         Document document = parse(html);
         Elements elements = document.getElementsByTag("img");
         List<String> imgs = new ArrayList<String>();
@@ -51,8 +53,15 @@ public class JsoupServicesImp implements ResovleService {
     }
 
     public boolean saveUrl(String html) {
+        if (html == "kong")
+            return false;
         Document document = parse(html);
         List<String> urls = getUrl(document);
         return redisdao.saveUrlPath(urls);
+    }
+
+    @Override
+    public boolean deleteUrl(List<String> urls) {
+        return redisdao.deleteUrl(urls);
     }
 }
