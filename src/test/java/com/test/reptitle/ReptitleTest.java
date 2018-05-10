@@ -1,14 +1,11 @@
 package com.test.reptitle;
 
-import com.Reptile.dao.Redisdao;
-import com.Reptile.dao.daoImp.RedisdaoImp;
-import com.Reptile.service.ReptitleService;
-import com.Reptile.service.ResovleService;
-import com.Reptile.service.serviceImp.JsoupServicesImp;
-import com.Reptile.service.serviceImp.ReptitleClientImp;
-import org.jsoup.nodes.Document;
-
-import java.util.List;
+import com.ReptileCore.dao.Redisdao;
+import com.ReptileCore.dao.daoImp.RedisdaoImp;
+import com.ReptileCore.service.ReptitleService;
+import com.ReptileCore.service.ResovleService;
+import com.ReptileCore.service.serviceImp.JsoupServicesImp;
+import com.ReptileCore.service.serviceImp.ReptitleClientImp;
 
 public class ReptitleTest {
     private static ReptitleService reptitleService = new ReptitleClientImp();
