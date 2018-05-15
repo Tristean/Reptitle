@@ -1,0 +1,8 @@
+19:03:02: 登录BugZilla成功:
+19:03:03: token值为:M2pz62J8Wk
+19:03:06: 向268413添加附件失败.'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "D:\jkls\Bugzilla.py", line 356, in report_bug
+    for attach in attachments:
+TypeError: 'NoneType' object is not iterable
+

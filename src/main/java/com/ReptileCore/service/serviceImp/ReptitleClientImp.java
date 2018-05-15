@@ -22,10 +22,12 @@ import java.util.Map;
 
 public class ReptitleClientImp implements ReptitleService {
     private List<NameValuePair> list = new ArrayList<NameValuePair>();
+    private String url;
     public HttpClient getClient() {
         HttpClient client = new DefaultHttpClient();
         return client;
     }
+
 
     public String httpGet(String url) {
         if (url == null || !url.contains("http") || url.equals(""))

@@ -41,12 +41,15 @@ public class RedisdaoImp implements Redisdao {
         List<String> list = new ArrayList<String>();
 
         for (int i = 0;i < 1000; i++) {
-            String url = jedis.get(i+"");
-            if (url == null) {
+            String url = jedis.get(i + "");
+            if (url == null || url.equals("")) {
                 break;
             }
             if (!url.contains("http:") && urlService.hasFeature(url)) {
                 url = urlService.ChangeUrl(url);
+            }
+            if (url.charAt(0) == '/' || url.charAt(0) == '#') {
+                url = urlService.changeUrlFromRelative(url);
             }
             list.add(url);
         }

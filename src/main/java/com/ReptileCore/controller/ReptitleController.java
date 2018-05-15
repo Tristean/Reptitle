@@ -1,5 +1,6 @@
 package com.ReptileCore.controller;
 
+import com.ReptileCore.Util.UrlUtil;
 import com.ReptileCore.service.ReptitleService;
 import com.ReptileCore.service.ResovleService;
 import com.ReptileCore.service.serviceImp.JsoupServicesImp;
@@ -14,16 +15,7 @@ import java.util.List;
 public class ReptitleController {
     private  ReptitleService reptitleService = new ReptitleClientImp();
     private  ResovleService  resovleService = new JsoupServicesImp();
-    private  boolean isContinue = true;
     static List<List<String>> listOfImg = new ArrayList<List<String>>();
-    private   int count = 0;
-
-    public  boolean isContinue() {
-        return isContinue;
-    }
-    public  void setContinue(boolean aContinue) {
-        isContinue = aContinue;
-    }
 
     public void getText(String url) {
         /*
@@ -43,13 +35,16 @@ public class ReptitleController {
             getText(urls.get(count));
         }
         */
+        UrlUtil.setF_url(url);
         System.out.println(" 要抓取的页面为url = " + url );
         String html = reptitleService.httpGet(url);
-        resolve(html);
+        if (html != null || !html.equals("")) {
+            resolve(html);
+        }
     }
 
     public void getTextFromPost(String url, HashMap<String,String> map) {
-        System.out.println("url = " + url);
+        System.out.println(" url = " + url);
         String html = reptitleService.httpPost(url, map);
         resolve(html);
     }
@@ -58,6 +53,8 @@ public class ReptitleController {
         List<String> imgs = resovleService.getImg(html);
         listOfImg.add(imgs);
         resovleService.saveUrl(html);
+        System.out.println("页面处理成功");
+        /*
         List<String> urls = resovleService.getFromRedis();
         System.out.println("要抓取的页面url总数为" + urls.size());
         try {
@@ -67,7 +64,7 @@ public class ReptitleController {
                 if (tempUrl == null || tempUrl.equals("")) {
                     continue;
                 }
-                html = reptitleService.httpGet(urls.get(i));
+                html = reptitleService.httpGet(tempUrl);
                 imgs = resovleService.getImg(html);
                 listOfImg.add(imgs);
                 resovleService.saveUrl(html);
@@ -77,11 +74,10 @@ public class ReptitleController {
         } catch (Exception e)  {
             e.printStackTrace();
             resovleService.deleteUrl(urls);
-        }
+        }*/
     }
 
-    public void main(String [] args) {
-        getText("http://gyxzs.net/");
-        System.out.println(listOfImg.size());
+    public List<String> getUrls() {
+        return resovleService.getFromRedis();
     }
 }
