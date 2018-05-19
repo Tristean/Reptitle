@@ -8,4 +8,6 @@ public interface Redisdao {
      boolean deleteUrl(List<String> urls);
 
     void close();
+
+    void delete();
 }

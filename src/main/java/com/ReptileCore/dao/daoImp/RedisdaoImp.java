@@ -45,11 +45,12 @@ public class RedisdaoImp implements Redisdao {
             if (url == null || url.equals("")) {
                 break;
             }
-            if (!url.contains("http:") && urlService.hasFeature(url)) {
-                url = urlService.ChangeUrl(url);
-            }
+
             if (url.charAt(0) == '/' || url.charAt(0) == '#') {
                 url = urlService.changeUrlFromRelative(url);
+            }
+            else if (!url.contains("http:") && urlService.hasFeature(url)) {
+                url = urlService.ChangeUrl(url);
             }
             list.add(url);
         }
@@ -62,7 +63,18 @@ public class RedisdaoImp implements Redisdao {
         jedis.auth("guliangjing52");
         try {
           for (int i = 0; i < urls.size(); i++) {
-              jedis.set(id+"",urls.get(i));
+              String url = urls.get(i);
+              if (url == null || url.equals("")) {
+                  break;
+              }
+              if (!url.contains("http:") && urlService.hasFeature(url)) {
+                  url = urlService.ChangeUrl(url);
+              }
+              if (url.charAt(0) == '/' || url.charAt(0) == '#') {
+                  url = urlService.changeUrlFromRelative(url);
+                  System.out.println("方法执行");
+              }
+              jedis.set(id + "",url);
               id++;
           }
           System.out.println("存储success");
@@ -90,5 +102,10 @@ public class RedisdaoImp implements Redisdao {
             jedis.close();
             System.out.println("jedis关闭成功");
         }
+    }
+
+    @Override
+    public void delete() {
+
     }
 }

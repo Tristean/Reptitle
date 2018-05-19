@@ -49,7 +49,7 @@ public class ReptitleController {
         resolve(html);
     }
 
-    public void resolve(String html) {
+    protected void resolve(String html) {
         List<String> imgs = resovleService.getImg(html);
         listOfImg.add(imgs);
         resovleService.saveUrl(html);

@@ -1,7 +1,7 @@
 package com.ReptileCore.Util;
 
 public class UrlUtil {
-    private static String f_url;
+    private static volatile String f_url;
 
     public static String getF_url() {
         return f_url;
@@ -30,6 +30,8 @@ public class UrlUtil {
             return false;
         }
         if (url.charAt(0) == '/')
+            return false;
+        if (url.contains("#"))
             return false;
         return true;
     }
