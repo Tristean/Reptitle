@@ -1,6 +1,10 @@
 package com.ReptileCore.Util;
 
+import org.apache.log4j.Logger;
+
 public class UrlUtil {
+    private static Logger logger = Logger.getLogger(UrlUtil.class);
+
     private static volatile String f_url;
 
     public static String getF_url() {

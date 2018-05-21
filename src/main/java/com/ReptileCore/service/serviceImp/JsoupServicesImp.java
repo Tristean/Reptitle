@@ -5,6 +5,7 @@ import com.ReptileCore.dao.daoImp.RedisdaoImp;
 import com.ReptileCore.dao.daoImp.UrlDaoImp;
 import com.ReptileCore.service.ResovleService;
 import com.ReptileCore.dao.UrlDao;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsoupServicesImp implements ResovleService {
+    private static Logger logger = Logger.getLogger(JsoupServicesImp.class);
     private UrlDao urlService = new UrlDaoImp();
     private Redisdao redisdao = new RedisdaoImp("120.78.198.157",6379);
 

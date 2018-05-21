@@ -1,6 +1,7 @@
 package com.ReptitleThreads;
 
 import com.ReptitleThreads.Task.ReptitleTask;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -9,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ReptitleTitlePool {
+    private static Logger logger = Logger.getLogger(ReptitleTitlePool.class);
     private Executor executor = Executors.newCachedThreadPool();
     private List<String> list = null;
     private AtomicInteger taskId = new AtomicInteger(0);

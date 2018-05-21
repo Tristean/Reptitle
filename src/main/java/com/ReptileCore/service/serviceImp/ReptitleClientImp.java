@@ -1,5 +1,6 @@
 package com.ReptileCore.service.serviceImp;
 
+import com.ReptileCore.dao.daoImp.RedisdaoImp;
 import com.ReptileCore.service.ReptitleService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ReptitleClientImp implements ReptitleService {
+    private static Logger logger = Logger.getLogger(ReptitleClientImp.class);
     private List<NameValuePair> list = new ArrayList<NameValuePair>();
     private String url;
     public HttpClient getClient() {

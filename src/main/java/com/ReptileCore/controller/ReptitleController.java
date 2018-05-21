@@ -5,6 +5,7 @@ import com.ReptileCore.service.ReptitleService;
 import com.ReptileCore.service.ResovleService;
 import com.ReptileCore.service.serviceImp.JsoupServicesImp;
 import com.ReptileCore.service.serviceImp.ReptitleClientImp;
+import org.apache.log4j.Logger;
 
 
 import java.util.ArrayList;
@@ -13,11 +14,12 @@ import java.util.List;
 
 
 public class ReptitleController {
+    private static Logger logger = Logger.getLogger(ReptitleController.class);
     private  ReptitleService reptitleService = new ReptitleClientImp();
     private  ResovleService  resovleService = new JsoupServicesImp();
     static List<List<String>> listOfImg = new ArrayList<List<String>>();
 
-    public void getText(String url) {
+    public void getTextFromGet(String url) {
         /*
         while(isContinue) {
             if (count == 10) {

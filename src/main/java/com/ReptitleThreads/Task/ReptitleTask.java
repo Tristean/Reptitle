@@ -1,8 +1,11 @@
 package com.ReptitleThreads.Task;
 
 import com.ReptileCore.controller.ReptitleController;
+import com.ReptileCore.dao.daoImp.RedisdaoImp;
+import org.apache.log4j.Logger;
 
 public class ReptitleTask implements Runnable {
+    private static Logger logger = Logger.getLogger(ReptitleTask.class);
     private String taskName;
     private String url;
 

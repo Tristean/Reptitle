@@ -1,7 +1,7 @@
 package com.ReptileCore.dao.daoImp;
-
 import com.ReptileCore.dao.Redisdao;
 import com.ReptileCore.dao.UrlDao;
+import org.apache.log4j.Logger;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RedisdaoImp implements Redisdao {
+    private static Logger logger = Logger.getLogger(RedisdaoImp.class);
     private int id = 0;
     private JedisPool jedisPool;
     private UrlDao urlService = new UrlDaoImp();
